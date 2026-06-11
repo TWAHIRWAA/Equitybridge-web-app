@@ -13,7 +13,7 @@ export default function App() {
 
           {/* LOGO */}
           <img
-            src="/logo.png"
+            src="/logo.jpg"
             alt="Equity Bridge Rwanda"
             className="logo"
           />
