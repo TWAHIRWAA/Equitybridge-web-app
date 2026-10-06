@@ -1,0 +1,111 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-gold: var(--gold);
+  --color-sand: var(--sand);
+}
+
+:root {
+  --radius: 0.5rem;
+  /* Warm Rwandan palette: deep forest, terracotta clay, highland gold, cream */
+  --background: oklch(0.975 0.012 85);
+  --foreground: oklch(0.22 0.03 150);
+  --card: oklch(0.99 0.008 85);
+  --card-foreground: oklch(0.22 0.03 150);
+  --popover: oklch(0.99 0.008 85);
+  --popover-foreground: oklch(0.22 0.03 150);
+  --primary: oklch(0.36 0.07 155);
+  --primary-foreground: oklch(0.97 0.015 85);
+  --secondary: oklch(0.93 0.025 80);
+  --secondary-foreground: oklch(0.25 0.04 150);
+  --muted: oklch(0.94 0.018 82);
+  --muted-foreground: oklch(0.48 0.03 140);
+  --accent: oklch(0.62 0.14 45);
+  --accent-foreground: oklch(0.98 0.01 85);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.88 0.02 85);
+  --input: oklch(0.88 0.02 85);
+  --ring: oklch(0.62 0.14 45);
+  --ink: oklch(0.2 0.035 155);
+  --ink-foreground: oklch(0.95 0.02 85);
+  --gold: oklch(0.8 0.13 80);
+  --sand: oklch(0.9 0.04 75);
+
+  --gradient-veil: linear-gradient(180deg, oklch(0.18 0.03 155 / 0.25) 0%, oklch(0.16 0.03 155 / 0.85) 100%);
+  --gradient-side: linear-gradient(90deg, oklch(0.16 0.03 155 / 0.9) 0%, oklch(0.16 0.03 155 / 0.2) 100%);
+  --shadow-soft: 0 20px 50px -24px oklch(0.2 0.04 150 / 0.35);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+@utility bg-veil { background-image: var(--gradient-veil); }
+@utility bg-side { background-image: var(--gradient-side); }
+@utility shadow-soft { box-shadow: var(--shadow-soft); }
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1); }
+.reveal.is-in { opacity: 1; transform: none; }
+.reveal-img { clip-path: inset(0 0 100% 0); transition: clip-path 1.2s cubic-bezier(.7,0,.2,1); }
+.reveal-img.is-in { clip-path: inset(0 0 0 0); }
+.line-grow { transform: scaleY(0); transform-origin: top; transition: transform 1.4s ease; }
+.line-grow.is-in { transform: scaleY(1); }
+
+@keyframes kenburns { from { transform: scale(1.08); } to { transform: scale(1); } }
+.animate-kenburns { animation: kenburns 7s ease-out forwards; }
+
+@keyframes flow { to { stroke-dashoffset: -40; } }
+.bridge-flow { stroke-dasharray: 6 14; animation: flow 1.6s linear infinite; }
